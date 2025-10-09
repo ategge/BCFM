@@ -1,0 +1,238 @@
+---
+title: "Getting Started with BCFM: A Complete Workflow"
+author: "Allison Tegge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with BCFM: A Complete Workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 6
+)
+
+library(BCFM)
+library(dplyr)    # For %>% pipe operator
+library(tidyr)    # For pivot_longer
+library(ggplot2)  # For plotting
+```
+
+### Introduction
+This vignette demonstrates a complete workflow for using the BCFM (Bayesian Covariance Factor Model) package. We'll use a simulated dataset that comes with the package to illustrate:
+
+- Data preparation and exploration
+- Model selection across different numbers of groups and factors
+- Fitting the optimal model
+- Comprehensive visualization of results
+
+### Load and Explore the Data
+For this tutorial, we use a simulated dataset included in the BCFM package. The dataset contains 200 observations, 20 variables, and 5 time points, with a known structure of 4 groups and 3 latent factors.
+
+```{r}
+# Load the simulated dataset
+data("sim.data", package = "BCFM")
+
+# Examine the structure
+str(sim.data)
+
+# Extract dimensions
+n_obs <- dim(sim.data$data)[1]      # 200 observations
+n_vars <- dim(sim.data$data)[2]     # 20 variables
+n_times <- dim(sim.data$data)[3]    # 5 time points
+
+cat("Dataset dimensions:\n")
+cat("  Observations:", n_obs, "\n")
+cat("  Variables:", n_vars, "\n")
+cat("  Time points:", n_times, "\n")
+```
+
+### Model Selection
+The first step is to identify the optimal number of groups (clusters) and latent factors. We use BCFM.model.selection() to fit models across a grid of possible configurations and compare them using BIC.
+
+```{r}
+# Specify which variables to use for clustering (all 20 variables)
+cluster.vars <- paste0("Var", 1:n_vars)
+
+# Run model selection over a grid
+# We'll test different numbers of groups and factors
+BCFM.model.selection(
+  data = sim.data$data,
+  cluster.vars = cluster.vars,
+  grouplist = 2:4,        # Try 2, 3, and 4 groups
+  factorlist = 2:4,       # Try 2, 3, and 4 factors
+  n.iter = 10000,         # Number of MCMC iterations
+  burnin = 5000,          # Burnin for BIC calculation
+  every = 2000            # Progress update frequency
+)
+```
+
+This will create multiple result files and a `BIC.Rdata` file containing the BIC matrix for model comparison.
+
+```{r}
+# Load BIC results
+load("BIC.Rdata")
+print(BIC.matrix)
+
+# Find optimal configuration
+optimal <- which(BIC.matrix == min(BIC.matrix, na.rm = TRUE), arr.ind = TRUE)
+cat("Optimal number of groups:", optimal[1], "\n")
+cat("Optimal number of factors:", optimal[2], "\n")
+```
+
+### Load the Fitted Model
+For this demonstration, we'll load a pre-fitted model with 4 groups and 4 factors:
+
+```{r}
+# Load pre-computed example results
+data("SDresult", package = "BCFM")
+
+# The results are stored in SDresult$Result
+str(SDresult$Result)
+```
+
+### Visualization
+The BCFM package provides comprehensive visualization functions to explore your results.
+
+#### 1. Latent Profiles
+Visualize the mean profiles for each cluster:
+
+```{r}
+ggplot.latent.profiles(Gibbs = SDresult$Result)
+
+```
+
+#### 2. Factor Loadings Matrix
+
+The factor loadings matrix B shows the relationship between observed variables and latent factors. Each column represents a latent factor, and each row represents a variable. Higher absolute values indicate stronger associations.
+
+```{r factor-loadings-prep, eval=FALSE}
+# Calculate posterior mean of B (after burnin)
+B.matrix <- apply(SDresult$Result$B[100:5000, , ], MARGIN = c(2, 3), FUN = mean)
+B.matrix <- as.data.frame(B.matrix)
+
+# Set variable names
+rownames(B.matrix) <- paste0("Var", 1:nrow(B.matrix))
+
+# Set informative column names for factors
+colnames(B.matrix) <- paste0("Factor ", 1:ncol(B.matrix))
+
+# Print the factor loadings matrix
+knitr::kable(round(B.matrix, 3), 
+             caption = "Posterior Mean Factor Loadings",
+             align = 'c')
+```
+
+#### 3. Loading Matrix (B) - Credible Intervals
+Examine the factor loadings with credible intervals:
+
+```{r}
+ggplot.B.CI(SDresult$Result)
+```
+#### 4. Loading Matrix (B) - Trace Plots
+Check MCMC convergence for factor loadings:
+
+```{r}
+# All variables
+ggplot.B.trace(Gibbs = SDresult$Result, factor.num = NULL)
+# Specific variable (e.g., variable 1)
+ggplot.B.trace(Gibbs = SDresult$Result, factor.num = 1)
+```
+
+#### 5. Cluster Means (Mu) - Density Plots
+Explore the posterior distributions of cluster means:
+```{r}
+ggplot.mu.density(Gibbs = SDresult$Result, add.legend = TRUE)
+```
+
+#### 6. Covariance Structure (Omega) - Density Plots
+Visualize the within-cluster covariance structure:
+```{r}
+# Plot Omega for first cluster
+ggplot.omega.density(Gibbs = SDresult$Result, group.select = 1, 
+                     show.offdiag = FALSE)
+
+# Plot Omega for second cluster
+ggplot.omega.density(Gibbs = SDresult$Result, group.select = 2, 
+                     show.offdiag = FALSE)
+```
+
+#### 7.  Cluster Probabilities - Density Plots
+Examine the posterior distributions of cluster membership probabilities:
+```{r}
+ggplot.probs.density(Gibbs = SDresult$Result)
+```
+
+#### 8. Cluster Probabilities - Trace Plots
+Check convergence of cluster probabilities:
+
+```{r}
+ggplot.probs.trace(Gibbs = SDresult$Result)
+```
+
+#### 9. Error Variances (Sigma²) - Credible Intervals
+Visualize the idiosyncratic error variances:
+```{r}
+ggplot.sigma2.CI(Gibbs = SDresult$Result)
+```
+
+#### 10. Factor Variances (Tau) - Credible Intervals
+Examine the latent factor variances:
+```{r}
+ggplot.tau.CI(Gibbs = SDresult$Result)
+```
+
+#### 11. Variance Decomposition
+Understand how variance is partitioned across factors:
+```{r}
+# Use first time point: 200 x 20
+data_t1 <- sim.data$data[, , 1]
+ggplot.variability(data = data_t1, nfactors = 4)
+```
+
+#### 12. Cluster Assignments Heatmap
+Visualize the cluster membership assignments over MCMC iterations:
+```{r}
+ggplot.Zit.heatmap(Gibbs = SDresult$Result)
+```
+### Interpreting Results
+#### Cluster Assignments
+The heatmap shows how observations are assigned to clusters. Stable assignments (consistent colors across iterations) indicate good convergence and clear cluster structure.
+#### Factor Loadings
+The loading matrix B shows which variables are associated with each latent factor. Large credible intervals that include zero suggest weak associations.
+#### Cluster Characteristics
+The latent profiles plot reveals the distinctive patterns of each cluster across variables, helping to interpret what makes each cluster unique.
+#### Accessing Model Components
+You can directly access various components of the fitted model:
+```{r}
+```{r}
+# Cluster assignments (most likely cluster for each observation)
+cluster_assignments <- SDresult$Result$Z
+
+# Loading matrix
+loadings <- SDresult$Result$B
+
+# Cluster means
+cluster_means <- SDresult$Result$mu
+
+# Cluster probabilities
+cluster_probs <- SDresult$Result$probs
+
+# Factor scores
+factor_scores <- SDresult$Result$X
+
+# Show dimensions
+cat("Dimensions of key components:\n")
+cat("  B (loadings):", dim(loadings), "\n")
+cat("  mu (means):", dim(cluster_means), "\n")
+cat("  X (scores):", dim(factor_scores), "\n")
+```
+
+### Session Info
+```{r}
+sessionInfo()
+```
