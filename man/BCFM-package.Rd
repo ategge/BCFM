@@ -4,12 +4,27 @@
 \name{BCFM-package}
 \alias{BCFM}
 \alias{BCFM-package}
-\title{BCFM: What the Package Does (One Line, Title Case)}
+\title{BCFM: Bayesian Covariance Factor Model for Clustering and Factor Analysis}
 \description{
-What the package does (one paragraph).
+Implements Bayesian Covariance Factor Model (BCFM) for clustering and latent factor analysis of multivariate longitudinal data. Provides model selection tools, MCMC sampling via Rcpp, and comprehensive visualization functions for exploring cluster assignments, factor loadings, and model diagnostics.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ategge/BCFM}
+  \item Report bugs at \url{https://github.com/ategge/BCFM/issues}
+}
+
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com}
+\strong{Maintainer}: Meriem Touami \email{meriemt@vt.edu}
+
+Authors:
+\itemize{
+  \item Allison Tegge \email{ategge@vt.edu}
+  \item Marco Ferreira \email{marf@vt.edu}
+  \item Shuangshuang Xu \email{xshuangshuang@vt.edu}
+}
 
 }
 \keyword{internal}

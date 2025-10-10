@@ -14,7 +14,8 @@ BCFM.model.selection(
   covariance = TRUE,
   p.exponent = 2,
   every = 10,
-  burnin = NA
+  burnin = NA,
+  output_dir = getwd()
 )
 }
 \arguments{
@@ -44,6 +45,9 @@ Default is 10.}
 
 \item{burnin}{Number of initial MCMC iterations to discard when calculating BIC.
 If NA, an appropriate burnin is determined automatically.}
+
+\item{output_dir}{Directory where results will be saved. Defaults to current
+working directory. The function will create this directory if it doesn't exist.}
 }
 \value{
 Invisibly returns NULL. Results are saved to disk:

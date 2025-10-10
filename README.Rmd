@@ -34,6 +34,9 @@ data("sim.data", package = "BCFM")
 # Specify variables to use for clustering
 cluster.vars <- paste0("Var", 1:20)
 
+# Create output directory for results
+output_dir <- "~/BCFM_results"
+
 # Run model selection
 BCFM.model.selection(
   data = sim.data$data,
@@ -43,10 +46,13 @@ BCFM.model.selection(
   n.iter = 10000,                # Number of MCMC iterations
   burnin = 5000,                 # Burnin for BIC calculation
   every = 1000                   # Progress update frequency
+  output_dir = output_dir        # Specify where to save results
+
 )
 
-# Load and visualize pre-computed results
-data("SDresult", package = "BCFM")
+# Results are saved in output_dir
+# Load and visualize
+load(file.path(output_dir, "results-covarianceF-g4-f4.Rdata"))
 ggplot.latent.profiles(SDresult$Result)
 ```
 

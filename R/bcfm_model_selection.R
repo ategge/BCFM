@@ -21,6 +21,8 @@
 #'   Default is 10.
 #' @param burnin Number of initial MCMC iterations to discard when calculating BIC.
 #'   If NA, an appropriate burnin is determined automatically.
+#' @param output_dir Directory where results will be saved. Defaults to current
+#'   working directory. The function will create this directory if it doesn't exist.
 #'
 #' @details The function performs the following steps for each group-factor combination:
 #' \enumerate{
@@ -79,7 +81,20 @@
 BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
                                  n.iter = 50000, vague.mu = FALSE,
                                  covariance = TRUE, p.exponent = 2,
-                                 every = 10, burnin = NA) {
+                                 every = 10, burnin = NA, output_dir = getwd()) {
+  # Handle output directory
+  if (!dir.exists(output_dir)) {
+    dir.create(output_dir, recursive = TRUE)
+    message("Created output directory: ", output_dir)
+  }
+
+  # Save current directory and ensure we return to it
+  old_dir <- getwd()
+  on.exit(setwd(old_dir), add = TRUE)
+
+  # Change to output directory for saving results
+  setwd(output_dir)
+  message("Saving results to: ", output_dir)
 
   data.pre <- init.data(data, cluster.vars)
 
