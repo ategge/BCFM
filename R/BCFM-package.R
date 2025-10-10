@@ -7,5 +7,5 @@
 #' @importFrom psych fa
 #' @importFrom stats BIC
 #' @importFrom dplyr %>%
-#' ## usethis namespace: end
+## usethis namespace: end
 NULL
