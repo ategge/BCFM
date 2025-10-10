@@ -19,7 +19,7 @@ install.packages("BCFM")
 You can also install the development version of BCFM from GitHub with:
 ```r
 # install.packages("devtools")
-devtools::install_github("ategge/BCFM")
+devtools::install_github("ategge/BCFM", build_vignettes = TRUE)
 ```
 
 ## Example
@@ -31,18 +31,22 @@ library(BCFM)
 # Load example data
 data("sim.data", package = "BCFM")
 
+# Specify variables to use for clustering
+cluster.vars <- paste0("Var", 1:20)
+
 # Run model selection
 BCFM.model.selection(
   data = sim.data$data,
-  grouplist = 2:4,        # Try 2, 3, and 4 groups
-  factorlist = 2:4,       # Try 2, 3, and 4 factors
-  n.iter = 10000,         # Number of MCMC iterations
-  burnin = 5000,          # Burnin for BIC calculation
-  every = 1000            # Progress update frequency
+  cluster.vars = cluster.vars,  # Required parameter
+  grouplist = 2:4,               # Try 2, 3, and 4 groups
+  factorlist = 2:4,              # Try 2, 3, and 4 factors
+  n.iter = 10000,                # Number of MCMC iterations
+  burnin = 5000,                 # Burnin for BIC calculation
+  every = 1000                   # Progress update frequency
 )
 
-# Load and visualize results
-load("results-covarianceF-g4-f4.Rdata")
+# Load and visualize pre-computed results
+data("SDresult", package = "BCFM")
 ggplot.latent.profiles(SDresult$Result)
 ```
 
@@ -50,7 +54,7 @@ ggplot.latent.profiles(SDresult$Result)
 
 For a complete workflow tutorial, see the vignette:
 ```{r vignette, eval=FALSE}
-# After installation
+# After installation with build_vignettes = TRUE
 vignette("introduction-to-BCFM", package = "BCFM")
 
 # Or browse all vignettes
