@@ -33,9 +33,9 @@ arma::mat simulated_Z(List attributes, List parm){
           logdx(l) = logdmvnorm(Xnow, mu_l, Omega_l);
         }
         if(L == 1){
-          double Xnow_d = arma::conv_to<double>::from(Xt.row(i));
-          double mu_l_d = arma::conv_to<double>::from(mu.row(l));
-          double Omega_l_d = arma::conv_to<double>::from(Omega(arma::span(l,l), arma::span(0,L-1), arma::span(0,L-1)));
+          double Xnow_d = arma::as_scalar(Xt.row(i));
+          double mu_l_d = arma::as_scalar(mu.row(l));
+          double Omega_l_d = arma::as_scalar(Omega(arma::span(l,l), arma::span(0,L-1), arma::span(0,L-1)));
           logdx(l) = R::dnorm(Xnow_d, mu_l_d, Omega_l_d, TRUE);
         }
       }

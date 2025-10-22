@@ -96,7 +96,7 @@ double dmvnorm(arma::vec X, arma::vec mu, arma::mat Sigma){
   double n = Sigma.n_rows;
 
   Yvec = pow(2 * M_PI, -n/2) * pow(arma::det(Sigma), -0.5) * exp(-0.5 * arma::trans(Xmat - mumat) * arma::inv_sympd(Sigma) * (Xmat - mumat));
-  double Y = arma::conv_to<double>::from(Yvec);
+  double Y = arma::as_scalar(Yvec);
   return Y;
 
 }
@@ -108,7 +108,7 @@ double logdmvnorm(arma::vec X, arma::vec mu, arma::mat Sigma){
   arma::colvec mumat = arma::conv_to<arma::colvec>::from(mu);
   double n = Sigma.n_rows;
   if(!Sigma.is_symmetric()){Sigma = symmatu(Sigma);} // Force symmetry if not symmetric
-  double logdens = arma::conv_to<double>::from((-n/2)*log(2 * M_PI) - 0.5 * (arma::log_det(Sigma)) - 0.5 * (arma::trans(Xmat - mumat) * arma::inv_sympd(Sigma) * (Xmat - mumat)));
+  double logdens = std::real((-n/2)*log(2 * M_PI) - 0.5 * (arma::log_det(Sigma)) - 0.5 * arma::as_scalar((arma::trans(Xmat - mumat) * arma::inv_sympd(Sigma) * (Xmat - mumat))));
   return logdens;
 
 }
