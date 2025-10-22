@@ -79,9 +79,10 @@ This will create multiple result files and a `BIC.Rdata` file containing the BIC
 
 ```{r examine-bic, eval=FALSE}
 # After running model selection, load BIC results from the output directory
-# After running model selection, load BIC results from the output directory
 load(file.path(output_dir, "BIC.Rdata"))
 print(BIC.matrix)
+ggplot.BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4)
+
 
 # Example output:
 #       2    3    4

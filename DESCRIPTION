@@ -25,7 +25,9 @@ Imports:
     psych,
     RColorBrewer,
     stats,
-    tidyr
+    tidyr,
+    ggpubr,
+    tibble
 LinkingTo: 
     Rcpp,
     RcppArmadillo

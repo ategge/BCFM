@@ -4,7 +4,8 @@
 #' @param data  The dataset
 #' @param covariance  Logic variable indicating whether the analysis uses covariance or correlation matrix
 #' @param fa  Use factor analysis to sort the variables
-#' 
+#' @param L Number of latent factors
+
 #' @return  The vector of permutation
 #' @export
 
