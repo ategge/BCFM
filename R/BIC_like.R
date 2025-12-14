@@ -1,4 +1,3 @@
-
 #' @title BIC-like criterion. Very close to the original BIC method, but this uses the integrated likelihood instead.
 #' @description It finds a Laplace-Metropolis marginal density of likelihood using posterior mean. It also uses Woodbury lemma for fast calculation 
 #'
@@ -15,13 +14,13 @@
 #' 
 
 
-BIC.like <- function(data.row, Gibbs, model.attributes, burnin = NA){
+BIC_like <- function(data.row, Gibbs, model.attributes, burnin = NA){
   n.iter <- dim(Gibbs$B)[1]
   n <- model.attributes$S * model.attributes$times
   r <- model.attributes$R
   k <- model.attributes$L
   G <- model.attributes$G
-  npars <- r*k - sum(seq(1,k)) + model.attributes$G*k + k + (model.attributes$G-1)*k*(k+1)/2 + r + k + model.attributes$G - 1
+  npars <- r*k - sum(seq(1,k)) + model.attributes$G*k + k + (model.attributes$G-1)*k*(k+1)/2 + r + model.attributes$G - 1
   
   if(is.null(Gibbs$tau2)){Gibbs$tau2 <- Gibbs$tau}
   
@@ -114,21 +113,18 @@ BIC.like <- function(data.row, Gibbs, model.attributes, burnin = NA){
       sim.Z.mode[s,t] <- getmode(Gibbs$Z[,s,t])
     }
   }
-  # Calculate proportion of each cluster and check for small clusters
+  result <- NA
+  # Calculate proportion of each cluster
   for(tt in 1:model.attributes$times){
     cluster_counts <- table(sim.Z.mode[,tt])
     cluster_proportions <- cluster_counts / model.attributes$S
-    if(any(cluster_proportions < 0.05)) {
-      warning("At least one cluster has a proportion less than 5% at time ", tt, 
-              ". This may indicate poor model fit or convergence issues.")
+    if(sum(cluster_proportions >= 0.05) != G) {
+      result <- Inf
     }
   }
   
-  result <- npars*log(n) - 2*int.like.tot
+  if(is.na(result)){result <- npars*log(n) - 2*int.like.tot}
   
   return(result)
 
 }
-
-
-

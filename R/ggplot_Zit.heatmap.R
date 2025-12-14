@@ -12,10 +12,10 @@
 #' @importFrom ggplot2 ggplot aes geom_tile geom_line scale_fill_gradient theme ggtitle labs theme element_blank
 #'
 #' @return A ggplot object
-#' @export ggplot.Zit.heatmap
+#' @export ggplot_Zit.heatmap
 #' @export
 
-ggplot.Zit.heatmap <- function(Gibbs,
+ggplot_Zit.heatmap <- function(Gibbs,
                                 true.val = NA,
                                 burnin = NA,
                                 main.title = "Cluster Assignment Heatmap",

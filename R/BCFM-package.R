@@ -4,6 +4,7 @@
 ## usethis namespace: start
 #' @useDynLib BCFM, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
+#' @importFrom RcppArmadillo armadillo_version
 #' @importFrom psych fa
 #' @importFrom stats BIC cov dnorm factanal kmeans runif setNames var
 #' @importFrom dplyr %>%

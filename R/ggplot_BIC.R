@@ -52,7 +52,7 @@
 #' # Customize individual plots
 #' plots$by_groups + ggplot2::ggtitle("My Custom Title")
 #' }
-ggplot.BIC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TRUE) {
+ggplot_BIC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TRUE) {
   
   # Groups on X axis
   rows2 <- data.frame(matrix)

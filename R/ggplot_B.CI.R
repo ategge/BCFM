@@ -14,10 +14,10 @@
 #' @importFrom ggplot2 ggplot aes geom_point geom_errorbar geom_hline geom_vline facet_wrap theme_minimal labs theme element_text
 #'
 #' @return A ggplot object
-#' @export ggplot.B.CI
+#' @export ggplot_B.CI
 #' @export
 
-ggplot.B.CI <- function(Gibbs,
+ggplot_B.CI <- function(Gibbs,
                       true.val = NA,
                       burnin = NA,
                       permutation = NA,

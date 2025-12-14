@@ -13,10 +13,10 @@
 #' @importFrom stats quantile
 #' @importFrom ggplot2 ggplot aes geom_point geom_errorbar theme_minimal labs theme element_text
 #'
-#' @export ggplot.sigma2.CI
+#' @export ggplot_sigma2.CI
 #' @export
 
-ggplot.sigma2.CI <- function(Gibbs,
+ggplot_sigma2.CI <- function(Gibbs,
                            burnin = NA,
                            permutation = NA,
                            main.bool = TRUE,

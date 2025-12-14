@@ -14,10 +14,10 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @return A ggplot object (grob from grid.arrange) with plot and legend
-#' @export ggplot.probs.density
+#' @export ggplot_probs.density
 #' @export
 
-ggplot.probs.density <- function(Gibbs,
+ggplot_probs.density <- function(Gibbs,
                                   burnin = NA,
                                   truep = NA,
                                   main.title = "Posterior Densities of Cluster Probabilities",

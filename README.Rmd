@@ -53,11 +53,11 @@ BCFM.model.selection(
 # Results are saved in output_dir
 # Load and visualize BIC results
 load(file.path(output_dir, "BIC.Rdata"))
-ggplot.BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4)
+ggplot_BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4)
 
 # Load and visualize model results for 4 groups and 4 factorsß
 load(file.path(output_dir, "results-covarianceF-g4-f4.Rdata"))
-ggplot.latent.profiles(SDresult$Result)
+ggplot_latent.profiles(SDresult$Result)
 ```
 
 ## Vignette
