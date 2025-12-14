@@ -42,7 +42,7 @@ output_dir <- "~/BCFM_results"
 # Run model selection
 BCFM.model.selection(
   data = sim.data$data,
-  cluster.vars = cluster.vars,  # Required parameter
+  cluster.vars = cluster.vars,   # Required parameter
   grouplist = 2:4,               # Try 2, 3, and 4 groups
   factorlist = 2:4,              # Try 2, 3, and 4 factors
   n.iter = 10000,                # Number of MCMC iterations
@@ -57,7 +57,7 @@ BCFM.model.selection(
 load(file.path(output_dir, "BIC.Rdata"))
 ggplot_BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4)
 
-# Load and visualize model results for 4 groups and 4 factorsß
+# Load and visualize model results for 4 groups and 4 factors
 load(file.path(output_dir, "results-covarianceF-g4-f4.Rdata"))
 ggplot_latent.profiles(SDresult$Result)
 ```
