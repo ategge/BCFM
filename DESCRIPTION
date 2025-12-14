@@ -6,7 +6,8 @@ Authors@R: c(
     person("Allison", "Tegge", email = "ategge@vt.edu", role = "aut"),
     person("Marco", "Ferreira", email = "marf@vt.edu", role = "aut"),
     person("Shuangshuang", "Xu", email = "xshuangshuang@vt.edu", role = "aut"),
-    person("Meriem", "Touami", email = "meriemt@vt.edu", role = c("aut", "cre")))
+    person("Meriem", "Touami", email = "meriemt@vt.edu", role = c("aut", "cre"))
+  )
 Description: Implements Bayesian Covariance Factor Model (BCFM) for clustering 
     and latent factor analysis of multivariate longitudinal data. Provides model 
     selection tools, MCMC sampling via Rcpp, and comprehensive visualization functions 
