@@ -12,6 +12,7 @@ Description: Implements Bayesian Covariance Factor Model (BCFM) for clustering
     selection tools, MCMC sampling via Rcpp, and comprehensive visualization functions 
     for exploring cluster assignments, factor loadings, and model diagnostics.
 License: GPL (>= 3)
+SystemRequirements: pandoc (>= 1.12.3) for building vignettes
 Imports: 
     Rcpp,
     RcppArmadillo,
@@ -25,7 +26,9 @@ Imports:
     psych,
     RColorBrewer,
     stats,
-    tidyr
+    tidyr,
+    ggpubr,
+    tibble
 LinkingTo: 
     Rcpp,
     RcppArmadillo

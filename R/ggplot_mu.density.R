@@ -15,10 +15,10 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @return A ggplot object (grob from grid.arrange)
-#' @export ggplot.mu.density
+#' @export ggplot_mu.density
 #' @export
 
-ggplot.mu.density <- function(Gibbs,
+ggplot_mu.density <- function(Gibbs,
                                true.val = NA,
                                add.legend = FALSE,
                                burnin = NA,

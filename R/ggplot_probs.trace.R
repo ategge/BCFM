@@ -13,10 +13,10 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @return A ggplot object showing trace plots
-#' @export ggplot.probs.trace
+#' @export ggplot_probs.trace
 #' @export
 
-ggplot.probs.trace <- function(Gibbs,
+ggplot_probs.trace <- function(Gibbs,
                               burnin = NA,
                               main.title = "Trace Plot: Cluster Probabilities",
                               x.label = "BCFM Iteration (post burn-in)",

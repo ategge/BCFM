@@ -159,7 +159,7 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
                                every = every)
           save(SDresult, order, file = filename.temp.out)
             # Compare the run time with loops
-          BIC.matrix[i,j] = BIC.like(data, SDresult$Result,
+          BIC.matrix[i,j] = BIC_like(data, SDresult$Result,
                                      model.attributes, burnin = NA)
 
         },

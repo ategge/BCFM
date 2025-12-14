@@ -13,9 +13,9 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @return A ggplot object showing trace plots
-#' @export ggplot.B.trace
+#' @export ggplot_B.trace
 #' @export
-ggplot.B.trace <- function(Gibbs,
+ggplot_B.trace <- function(Gibbs,
                            burnin = NA,
                            permutation = NA,
                            true.val = NA,

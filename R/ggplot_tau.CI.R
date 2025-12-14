@@ -14,10 +14,10 @@
 #' @importFrom ggplot2 ggplot aes geom_point geom_errorbar theme_minimal labs theme element_text
 #'
 #' @return A ggplot object
-#' @export ggplot.tau.CI
+#' @export ggplot_tau.CI
 #' @export
 
-ggplot.tau.CI <- function(Gibbs,
+ggplot_tau.CI <- function(Gibbs,
                         burnin = NA,
                         true.val = NA,
                         main.bool = TRUE,

@@ -16,10 +16,10 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @return A ggplot object showing densities of Omega elements
-#' @export ggplot.omega.density
+#' @export ggplot_omega.density
 #' @export
 
-ggplot.omega.density <- function(Gibbs,
+ggplot_omega.density <- function(Gibbs,
                                   group.select = 1,
                                   true.val = NA,
                                   burnin = NA,

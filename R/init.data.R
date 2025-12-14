@@ -48,7 +48,6 @@ init.data <- function(data, cluster.vars = NULL) {
         data.pre <- data[, cluster.vars, , drop = FALSE]
       } else {
         # Character names - not typical for arrays but handle it
-        warning("Variable selection by name not typical for 3D arrays. Using all variables.")
         data.pre <- data
       }
       return(data.pre)

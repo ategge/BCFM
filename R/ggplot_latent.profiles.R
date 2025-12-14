@@ -20,19 +20,19 @@
 #' @examples
 #' \dontrun{
 #' # Basic usage
-#' ggplot.latent.profiles(Gibbs = SDresult$Result)
+#' ggplot_latent.profiles(Gibbs = SDresult$Result)
 #'
 #' # With custom labels
-#' ggplot.latent.profiles(
+#' ggplot_latent.profiles(
 #'   Gibbs = SDresult$Result,
 #'   factor_labels = c("Cigarette", "E-cig", "Pipe", "Hookah", "Snus", "Cigar"),
 #'   cluster_names = c("Traditionalists", "Experimenters", "Hybrid Users",
 #'                     "Social Smokers", "Nicotine Enthusiasts")
 #' )
 #' }
-#' @export ggplot.latent.profiles
+#' @export ggplot_latent.profiles
 #' @export
-ggplot.latent.profiles <- function(Gibbs,
+ggplot_latent.profiles <- function(Gibbs,
                                  burnin = NA,
                                  factor_labels = NULL,
                                  cluster_names = NULL,

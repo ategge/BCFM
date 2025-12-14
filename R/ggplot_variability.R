@@ -11,10 +11,10 @@
 #' @importFrom ggplot2 ggplot aes geom_line geom_point theme_minimal labs scale_x_continuous
 #'
 #' @return A ggplot object
-#' @export ggplot.variability
+#' @export ggplot_variability
 #' @export
 
-ggplot.variability <- function(data,
+ggplot_variability <- function(data,
                               nfactors = 5,
                               main.title = "Proportion of Variability Explained by Factors",
                               x.label = "Number of Factors",

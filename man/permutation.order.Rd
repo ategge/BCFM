@@ -11,6 +11,8 @@ permutation.order(data, covariance = FALSE, L = 1, fa = TRUE)
 
 \item{covariance}{Logic variable indicating whether the analysis uses covariance or correlation matrix}
 
+\item{L}{Number of latent factors}
+
 \item{fa}{Use factor analysis to sort the variables}
 }
 \value{
