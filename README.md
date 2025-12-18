@@ -5,8 +5,8 @@
 
 <!-- badges: end -->
 
-Bayesian Covariance Factor Model (BCFM) for clustering and latent factor
-analysis of multivariate longitudinal data.
+Bayesian Clustering Factor Model (BCFM) for clustering and latent factor
+analysis of multivariate cross-sectional data.
 
 ## Installation
 
@@ -46,7 +46,7 @@ BCFM.model.selection(
   grouplist = 2:4,               # Try 2, 3, and 4 groups
   factorlist = 2:4,              # Try 2, 3, and 4 factors
   n.iter = 10000,                # Number of MCMC iterations
-  burnin = 5000,                 # Burnin for BIC calculation
+  burnin = 5000,                 # Burnin for Information Criterion calculations
   every = 1000                   # Progress update frequency
   output_dir = output_dir        # Specify where to save results
 
