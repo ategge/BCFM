@@ -1,9 +1,9 @@
-#' Plot BIC Matrix from Model Selection
+#' Plot IC Matrix from Model Selection
 #'
-#' Creates two plots showing BIC values across different numbers
+#' Creates two plots showing IC values across different numbers
 #' of groups and factors to help identify the optimal model configuration.
 #'
-#' @param matrix A BIC matrix from BCFM.model.selection, with rows representing
+#' @param matrix An IC matrix from BCFM.model.selection, with rows representing
 #'   groups and columns representing factors.
 #' @param factor_list Numeric vector of factor values corresponding to matrix columns.
 #'   Default is 2:6.
@@ -15,17 +15,17 @@
 #' @return If combine = TRUE, a combined ggplot object. If combine = FALSE, 
 #'   a list with two elements:
 #' \describe{
-#'   \item{by_groups}{ggplot showing BIC vs. number of groups}
-#'   \item{by_factors}{ggplot showing BIC vs. number of factors}
+#'   \item{by_groups}{ggplot showing IC vs. number of groups}
+#'   \item{by_factors}{ggplot showing IC vs. number of factors}
 #' }
 #'
 #' @details The function creates two complementary visualizations:
 #' \itemize{
-#'   \item Plot 1: BIC vs. number of groups, with lines for each number of factors
-#'   \item Plot 2: BIC vs. number of factors, with lines for each number of groups
+#'   \item Plot 1: IC vs. number of groups, with lines for each number of factors
+#'   \item Plot 2: IC vs. number of factors, with lines for each number of groups
 #' }
 #'
-#' Lower BIC values indicate better model fit.
+#' Lower IC values indicate better model fit.
 #'
 #' @importFrom dplyr %>%
 #' @importFrom tibble rownames_to_column
@@ -38,13 +38,13 @@
 #' @examples
 #' \dontrun{
 #' # After running BCFM.model.selection
-#' load("BIC.Rdata")
+#' load("IC.Rdata")
 #' 
 #' # Combined plot (default)
-#' plot_BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4)
+#' plot_IC(IC.matrix, factor_list = 2:4, group_list = 2:4)
 #' 
 #' # Separate ggplot objects
-#' plots <- plot_BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4, 
+#' plots <- plot_IC(IC.matrix, factor_list = 2:4, group_list = 2:4, 
 #'                   combine = FALSE)
 #' plots$by_groups      # First plot
 #' plots$by_factors     # Second plot
@@ -52,7 +52,7 @@
 #' # Customize individual plots
 #' plots$by_groups + ggplot2::ggtitle("My Custom Title")
 #' }
-ggplot_BIC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TRUE) {
+ggplot_IC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TRUE) {
   
   # Groups on X axis
   rows2 <- data.frame(matrix)
@@ -70,9 +70,9 @@ ggplot_BIC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TR
     aes(groups, value, color = as.factor(factors), group = as.factor(factors)) + 
     geom_point(size = 2) + 
     geom_line() +
-    labs(title = "BIC by Number of Groups",
+    labs(title = "IC by Number of Groups",
          x = "Number of Groups",
-         y = "BIC") +
+         y = "IC") +
     theme_bw() + 
     guides(color = guide_legend(title = "Factors"))
   
@@ -82,9 +82,9 @@ ggplot_BIC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TR
     aes(factors, value, color = as.factor(groups), group = as.factor(groups)) + 
     geom_point(size = 2) + 
     geom_line() +
-    labs(title = "BIC by Number of Factors",
+    labs(title = "IC by Number of Factors",
          x = "Number of Factors",
-         y = "BIC") +
+         y = "IC") +
     theme_bw() + 
     guides(color = guide_legend(title = "Groups"))
   
