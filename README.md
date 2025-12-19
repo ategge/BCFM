@@ -53,9 +53,9 @@ BCFM.model.selection(
 )
 
 # Results are saved in output_dir
-# Load and visualize BIC results
-load(file.path(output_dir, "BIC.Rdata"))
-ggplot_BIC(BIC.matrix, factor_list = 2:4, group_list = 2:4)
+# Load and visualize IC results
+load(file.path(output_dir, "IC.Rdata"))
+ggplot_IC(IC.matrix, factor_list = 2:4, group_list = 2:4)
 
 # Load and visualize model results for 4 groups and 4 factors
 load(file.path(output_dir, "results-covarianceF-g4-f4.Rdata"))
