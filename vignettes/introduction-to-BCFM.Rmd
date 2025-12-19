@@ -62,7 +62,7 @@ cat("  Time points:", n_times, "\n")
 
 # Model Selection
 
-The first step is to identify the optimal number of groups (clusters) and latent factors. We use `BCFM.model.selection()` to fit models across a grid of possible configurations and compare them using BIC.
+The first step is to identify the optimal number of groups (clusters) and latent factors. We use `BCFM.model.selection()` to fit models across a grid of possible configurations and compare them using IC.
 ```{r run-model-selection}
 # Specify variables to use for clustering
 cluster.vars <- paste0("Var", 1:n_vars)
@@ -79,7 +79,7 @@ BCFM.model.selection(
   grouplist = 4,          # Number of groups 
   factorlist = 3,         # Number of factors
   n.iter = 100,           # Number of MCMC iterations (use 50000+ for real analysis)
-  burnin = 10,            # Burnin for BIC calculation (use 10000+ for real analysis)
+  burnin = 10,            # Burnin for IC calculation (use 10000+ for real analysis)
   every = 10,             # Progress update frequency
   output_dir = output_dir # Specify where to save results
 )
@@ -98,9 +98,9 @@ After running model selection, check the output directory:
 # Check what files were created
 list.files(output_dir)
 
-# Load BIC results (if multiple models were fitted)
-load(file.path(output_dir, "BIC.Rdata"))
-print(BIC.matrix)
+# Load IC results (if multiple models were fitted)
+load(file.path(output_dir, "IC.Rdata"))
+print(IC.matrix)
 
 # Load the fitted model results
 load(file.path(output_dir, "results-covarianceF-g4-f3.Rdata"))
@@ -109,7 +109,7 @@ load(file.path(output_dir, "results-covarianceF-g4-f3.Rdata"))
 str(SDresult$Result, max.level = 1)
 ```
 
-When testing multiple configurations (e.g., `grouplist = 2:4, factorlist = 2:4`), a `BIC.Rdata` file is created for model comparison.
+When testing multiple configurations (e.g., `grouplist = 2:4, factorlist = 2:4`), an `IC.Rdata` file is created for model comparison.
 
 ---
 
@@ -259,7 +259,7 @@ cat("  X (scores):", dim(factor_scores), "\n")
 This vignette covered:
 
 1. **Model Selection** - Using `BCFM.model.selection()` to fit models
-2. **Output Examination** - Exploring result files and BIC matrices
+2. **Output Examination** - Exploring result files and IC matrices
 3. **Factor Analysis** - Interpreting loadings, convergence, and variance
 4. **Clustering** - Visualizing cluster profiles and assignments
 5. **Diagnostics** - Assessing model fit and convergence

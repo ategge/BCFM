@@ -43,7 +43,7 @@ Default is TRUE.}
 \item{every}{Integer specifying the frequency of progress updates during MCMC.
 Default is 10.}
 
-\item{burnin}{Number of initial MCMC iterations to discard when calculating BIC.
+\item{burnin}{Number of initial MCMC iterations to discard when calculating IC.
 If NA, an appropriate burnin is determined automatically.}
 
 \item{output_dir}{Directory where results will be saved. Defaults to current
@@ -55,14 +55,14 @@ Invisibly returns NULL. Results are saved to disk:
 \item{results-covarianceF-gX-fY.Rdata}{Individual model results for
 each group-factor combination (where X is the number of groups and Y is
 the number of factors), containing SDresult and variable order}
-\item{BIC.Rdata}{Contains BIC.matrix, md.matrix, timing information, and data.
+\item{IC.Rdata}{Contains IC.matrix, timing information, and data.
 Load this file to compare models and identify the optimal configuration.}
 }
 }
 \description{
 Performs Bayesian Covariance Factor Model analysis across a grid
 of group numbers and factor numbers. For each combination, the function fits
-the BCFM model, calculates BIC, and saves results. This is the primary function
+the BCFM model, calculates IC, and saves results. This is the primary function
 for model selection to determine the optimal number of clusters and latent factors.
 }
 \details{
@@ -72,12 +72,12 @@ The function performs the following steps for each group-factor combination:
 \item Determines optimal variable ordering using permutation.order
 \item Initializes model attributes and hyperparameters
 \item Fits BCFM model using BCFM.fit
-\item Calculates BIC for model comparison
-\item Saves individual results and cumulative BIC matrix
+\item Calculates IC for model comparison
+\item Saves individual results and cumulative IC matrix
 }
 
-The BIC matrix can be used to identify the optimal model configuration by
-selecting the combination of groups and factors with the lowest BIC value.
+The IC matrix can be used to identify the optimal model configuration by
+selecting the combination of groups and factors with the lowest IC value.
 }
 \note{
 This function can be computationally intensive as it fits multiple models.
@@ -98,12 +98,12 @@ BCFM.model.selection(
   burnin = 5000
 )
 
-# Load and examine BIC results
-load("BIC.Rdata")
-print(BIC.matrix)
+# Load and examine IC results
+load("IC.Rdata")
+print(IC.matrix)
 
 # Find optimal model
-optimal <- which(BIC.matrix == min(BIC.matrix, na.rm = TRUE), arr.ind = TRUE)
+optimal <- which(IC.matrix == min(IC.matrix, na.rm = TRUE), arr.ind = TRUE)
 cat("Optimal groups:", optimal[1], "Optimal factors:", optimal[2], "\n")
 }
 

@@ -1,4 +1,4 @@
-#' @title BIC-like criterion. Very close to the original BIC method, but this uses the integrated likelihood instead.
+#' @title Information Criterion. Very close to the original BIC method, but this uses the integrated likelihood instead.
 #' @description It finds a Laplace-Metropolis marginal density of likelihood using posterior mean. It also uses Woodbury lemma for fast calculation 
 #'
 #' @param data.row  The dataset
@@ -12,7 +12,7 @@
 #' @return  The value of Laplace-Metropolis marginal density
 #' @export
 
-BIC_like <- function(data.row, Gibbs, model.attributes, cluster.size = 0.05, burnin = NA){
+IC <- function(data.row, Gibbs, model.attributes, cluster.size = 0.05, burnin = NA){
   n.iter <- dim(Gibbs$B)[1]
   n <- model.attributes$S * model.attributes$times
   r <- model.attributes$R
