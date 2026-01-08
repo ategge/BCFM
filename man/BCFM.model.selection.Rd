@@ -44,6 +44,8 @@ Default is TRUE.}
 \item{every}{Integer specifying the frequency of progress updates during MCMC.
 Default is 10.}
 
+\item{cluster.size}{Minimum proportion required for each cluster. Default is 0.05.}
+
 \item{burnin}{Number of initial MCMC iterations to discard when calculating IC.
 If NA, an appropriate burnin is determined automatically.}
 

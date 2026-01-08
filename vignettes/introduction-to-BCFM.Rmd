@@ -48,14 +48,12 @@ data("sim.data", package = "BCFM")
 str(sim.data)
 
 # Extract dimensions
-n_obs <- dim(sim.data$data)[1]      # 200 observations
-n_vars <- dim(sim.data$data)[2]     # 20 variables
-n_times <- dim(sim.data$data)[3]    # 5 time points
+n_obs <- dim(sim.data)[1]      # 200 observations
+n_vars <- dim(sim.data)[2]     # 20 variables
 
 cat("Dataset dimensions:\n")
 cat("  Observations:", n_obs, "\n")
 cat("  Variables:", n_vars, "\n")
-cat("  Time points:", n_times, "\n")
 ```
 
 ---
@@ -65,7 +63,7 @@ cat("  Time points:", n_times, "\n")
 The first step is to identify the optimal number of groups (clusters) and latent factors. We use `BCFM.model.selection()` to fit models across a grid of possible configurations and compare them using IC.
 ```{r run-model-selection}
 # Specify variables to use for clustering
-cluster.vars <- paste0("Var", 1:n_vars)
+cluster.vars <- paste0("V", 1:n_vars)
 
 # Create output directory for results
 output_dir <- "~/BCFM_analysis"
@@ -74,7 +72,7 @@ output_dir <- "~/BCFM_analysis"
 # Note: grouplist and factorlist can be vectors (e.g., c(2, 3, 4)) or sequences (e.g., 2:4)
 # The function will fit a model for each combination of groups and factors
 BCFM.model.selection(
-  data = sim.data$data,
+  data = sim.data,
   cluster.vars = cluster.vars,
   grouplist = 4,          # Number of groups 
   factorlist = 3,         # Number of factors

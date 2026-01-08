@@ -19,6 +19,7 @@
 #' @param p.exponent The Dirichlet priors exponent for probabilities. Default is 2.
 #' @param every Integer specifying the frequency of progress updates during MCMC.
 #'   Default is 10.
+#' @param cluster.size Minimum proportion required for each cluster. Default is 0.05.
 #' @param burnin Number of initial MCMC iterations to discard when calculating IC.
 #'   If NA, an appropriate burnin is determined automatically.
 #' @param output_dir Directory where results will be saved. Defaults to current
