@@ -3,25 +3,23 @@
 \docType{data}
 \name{sim.data}
 \alias{sim.data}
-\title{Simulated BCFM Dataset}
+\title{Simulated data for BCFM model}
 \format{
-A list with components:
-\describe{
-\item{data}{A 3D numeric array (200 x 20 x 5)}
-\item{pselected}{Cluster assignments}
-\item{X}{Factor scores}
-\item{B}{Loading matrix}
+A data frame with 200 rows and 20 variables (V1 through V20):
+All variables are simulated numeric values.
 }
+\source{
+Simulated data generated for package examples
 }
 \usage{
 sim.data
 }
 \description{
-A simulated dataset for demonstrating the BCFM package functionality.
+A simulated dataset for demonstrating the Bayesian Consensus Factor Model.
 }
 \examples{
-data("sim.data", package = "BCFM")
-dim(sim.data$data)
-
+data(sim.data)
+dim(sim.data)
+head(sim.data)
 }
 \keyword{datasets}

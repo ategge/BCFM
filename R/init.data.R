@@ -39,7 +39,6 @@ init.data <- function(data, cluster.vars = NULL) {
   if (is.array(data) && length(dim(data)) == 3) {
     if (is.null(cluster.vars)) {
       # Data is already in correct format, return as-is
-      message("Data is already a 3D array. Returning as-is.")
       return(data)
     } else {
       # User wants to subset variables from 3D array
@@ -62,8 +61,6 @@ init.data <- function(data, cluster.vars = NULL) {
       n_vars <- ncol(data)
       data.pre <- array(dim = c(n_obs, n_vars, 1))
       data.pre[, , 1] <- data
-      message(sprintf("Converted %dx%d matrix to 3D array [%d, %d, 1]",
-                      n_obs, n_vars, n_obs, n_vars))
       return(data.pre)
     } else {
       # Subset columns
@@ -71,7 +68,7 @@ init.data <- function(data, cluster.vars = NULL) {
         selected_data <- data[, cluster.vars, drop = FALSE]
       } else if (is.character(cluster.vars)) {
         if (is.null(colnames(data))) {
-          stop("cluster.vars provided as names but matrix has no column names")
+          stop("cluster.vars provided as names but data has no column names")
         }
         selected_data <- data[, cluster.vars, drop = FALSE]
       } else {
@@ -82,8 +79,6 @@ init.data <- function(data, cluster.vars = NULL) {
       n_vars <- ncol(selected_data)
       data.pre <- array(dim = c(n_obs, n_vars, 1))
       data.pre[, , 1] <- selected_data
-      message(sprintf("Converted matrix to 3D array [%d, %d, 1] with %d selected variables",
-                      n_obs, n_vars, n_vars))
       return(data.pre)
     }
   }
@@ -113,8 +108,6 @@ init.data <- function(data, cluster.vars = NULL) {
     n_vars <- length(cluster.vars)
     data.pre <- array(dim = c(n_obs, n_vars, 1))
     data.pre[, , 1] <- as.matrix(data[cluster.vars])
-
-    message(sprintf("Converted data frame to 3D array [%d, %d, 1]", n_obs, n_vars))
     return(data.pre)
   }
 
