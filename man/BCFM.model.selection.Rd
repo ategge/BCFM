@@ -14,6 +14,7 @@ BCFM.model.selection(
   covariance = TRUE,
   p.exponent = 2,
   every = 10,
+  cluster.size = 0.05,
   burnin = NA,
   output_dir = getwd()
 )

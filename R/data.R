@@ -1,17 +1,16 @@
-#' Simulated BCFM Dataset
+#' Simulated data for BCFM model
 #'
-#' A simulated dataset for demonstrating the BCFM package functionality.
+#' A simulated dataset for demonstrating the Bayesian Consensus Factor Model.
 #'
-#' @format A list with components:
+#' @format A data frame with 200 rows and 20 variables:
 #' \describe{
-#'   \item{data}{A 3D numeric array (200 x 20 x 5)}
-#'   \item{pselected}{Cluster assignments}
-#'   \item{X}{Factor scores}
-#'   \item{B}{Loading matrix}
+#'   \item{Var1-Var20}{Simulated numeric variables}
 #' }
-#'
+#' 
+#' @source Simulated data generated for package examples
+#' 
 #' @examples
-#' data("sim.data", package = "BCFM")
-#' dim(sim.data$data)
-#'
+#' data(sim.data)
+#' dim(sim.data)  # 200 x 20
+#' head(sim.data)
 "sim.data"

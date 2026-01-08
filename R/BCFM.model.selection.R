@@ -81,7 +81,7 @@
 BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
                                  n.iter = 50000, vague.mu = FALSE,
                                  covariance = TRUE, p.exponent = 2,
-                                 every = 10, burnin = NA, output_dir = getwd()) {
+                                 every = 10, cluster.size = 0.05, burnin = NA, output_dir = getwd()) {
   # Handle output directory
   if (!dir.exists(output_dir)) {
     dir.create(output_dir, recursive = TRUE)
@@ -160,7 +160,7 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
           save(SDresult, order, file = filename.temp.out)
             # Compare the run time with loops
           IC.matrix[i,j] = IC(data, SDresult$Result,
-                                     model.attributes, burnin = NA)
+                                     model.attributes, cluster.size = cluster.size, burnin = burnin)
 
         },
         error = function(cond) {
