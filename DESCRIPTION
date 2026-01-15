@@ -1,14 +1,14 @@
 Package: BCFM
 Type: Package
-Title: Bayesian Covariance Factor Model for Clustering and Factor Analysis
+Title: Bayesian Clustering Factor Model for Clustering and Factor Analysis
 Version: 0.1.0
 Authors@R: c(
     person("Allison", "Tegge", email = "ategge@vt.edu", role = "aut"),
     person("Marco", "Ferreira", email = "marf@vt.edu", role = "aut"),
-    person("Shuangshuang", "Xu", email = "xshuangshuang@vt.edu", role = "aut"),
+    person("Hwasoo", "Shin", email = "hshin2@hfhs.org", role = "aut"),
     person("Meriem", "Touami", email = "meriemt@vt.edu", role = c("aut", "cre"))
   )
-Description: Implements Bayesian Covariance Factor Model (BCFM) for clustering 
+Description: Implements Bayesian Clustering Factor Model (BCFM) for clustering 
     and latent factor analysis of multivariate longitudinal data. Provides model 
     selection tools, MCMC sampling via Rcpp, and comprehensive visualization functions 
     for exploring cluster assignments, factor loadings, and model diagnostics.
