@@ -41,7 +41,7 @@ BCFM.model.selection(
   factorlist = 2:4,              # Try 2, 3, and 4 factors
   n.iter = 10000,                # Number of MCMC iterations
   burnin = 5000,                 # Burnin for Information Criterion calculations
-  every = 1000,                   # Progress update frequency
+  every = 10,                    # Retains the output of every "every" MCMC iterations
   output_dir = output_dir        # Specify where to save results
 
 )
