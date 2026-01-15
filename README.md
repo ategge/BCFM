@@ -5,7 +5,7 @@
 
 <!-- badges: end -->
 
-Bayesian Cluster Factor Model (BCFM) for clustering and latent factor
+Bayesian Clustering Factor Model (BCFM) for clustering and latent factor
 analysis of multivariate cross-sectional data.
 
 ## Installation
