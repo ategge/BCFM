@@ -99,7 +99,8 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
 
   data.pre <- init.data(data, cluster.vars)
 
-
+  if(is.na(burnin)){burnin <- round(n.iter / 10)}
+  
   IC.matrix = matrix(NA, nrow=length(grouplist), ncol=length(factorlist))
   rownames(IC.matrix) <- paste0("G", grouplist)
   colnames(IC.matrix) <- paste0("F", factorlist)
@@ -161,7 +162,7 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
           save(SDresult, order, file = filename.temp.out)
             # Compare the run time with loops
           IC.matrix[i,j] = IC(data, SDresult$Result,
-                                     model.attributes, cluster.size = cluster.size, burnin = burnin)
+                                     model.attributes, cluster.size = cluster.size, burnin = floor(burnin/every))
 
         },
         error = function(cond) {
