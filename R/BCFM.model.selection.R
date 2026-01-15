@@ -1,5 +1,5 @@
 #' @title BCFM Model Selection Over Multiple Groups and Factors
-#' @description Performs Bayesian Covariance Factor Model analysis across a grid
+#' @description Performs Bayesian Clustering Factor Model analysis across a grid
 #' of group numbers and factor numbers. For each combination, the function fits
 #' the BCFM model, calculates IC, and saves results. This is the primary function
 #' for model selection to determine the optimal number of clusters and latent factors.
@@ -19,6 +19,7 @@
 #' @param p.exponent The Dirichlet priors exponent for probabilities. Default is 2.
 #' @param every Integer specifying the frequency of progress updates during MCMC.
 #'   Default is 10.
+#' @param cluster.size Minimum proportion required for each cluster. Default is 0.05.
 #' @param burnin Number of initial MCMC iterations to discard when calculating IC.
 #'   If NA, an appropriate burnin is determined automatically.
 #' @param output_dir Directory where results will be saved. Defaults to current
@@ -81,7 +82,7 @@
 BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
                                  n.iter = 50000, vague.mu = FALSE,
                                  covariance = TRUE, p.exponent = 2,
-                                 every = 10, burnin = NA, output_dir = getwd()) {
+                                 every = 10, cluster.size = 0.05, burnin = NA, output_dir = getwd()) {
   # Handle output directory
   if (!dir.exists(output_dir)) {
     dir.create(output_dir, recursive = TRUE)
@@ -160,7 +161,7 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
           save(SDresult, order, file = filename.temp.out)
             # Compare the run time with loops
           IC.matrix[i,j] = IC(data, SDresult$Result,
-                                     model.attributes, burnin = NA)
+                                     model.attributes, cluster.size = cluster.size, burnin = burnin)
 
         },
         error = function(cond) {

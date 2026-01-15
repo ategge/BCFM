@@ -5,18 +5,12 @@
 
 <!-- badges: end -->
 
-Bayesian Clustering Factor Model (BCFM) for clustering and latent factor
+Bayesian Cluster Factor Model (BCFM) for clustering and latent factor
 analysis of multivariate cross-sectional data.
 
 ## Installation
 
-You can install BCFM from CRAN with:
-
-``` r
-install.packages("BCFM")
-```
-
-You can also install the development version of BCFM from GitHub with:
+You can install the development version of BCFM from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -34,20 +28,20 @@ library(BCFM)
 data("sim.data", package = "BCFM")
 
 # Specify variables to use for clustering
-cluster.vars <- paste0("Var", 1:20)
+cluster.vars <- paste0("V", 1:20)
 
 # Create output directory for results
 output_dir <- "~/BCFM_results"
 
 # Run model selection
 BCFM.model.selection(
-  data = sim.data$data,
-  cluster.vars = cluster.vars,   # Required parameter
+  data = sim.data,
+  cluster.vars = cluster.vars,  # Required parameter
   grouplist = 2:4,               # Try 2, 3, and 4 groups
   factorlist = 2:4,              # Try 2, 3, and 4 factors
   n.iter = 10000,                # Number of MCMC iterations
   burnin = 5000,                 # Burnin for Information Criterion calculations
-  every = 1000                   # Progress update frequency
+  every = 1000,                   # Progress update frequency
   output_dir = output_dir        # Specify where to save results
 
 )
@@ -57,8 +51,8 @@ BCFM.model.selection(
 load(file.path(output_dir, "IC.Rdata"))
 ggplot_IC(IC.matrix, factor_list = 2:4, group_list = 2:4)
 
-# Load and visualize model results for 4 groups and 4 factors
-load(file.path(output_dir, "results-covarianceF-g4-f4.Rdata"))
+# Load and visualize model results for 4 groups and 3 factors
+load(file.path(output_dir, "results-covarianceF-g4-f3.Rdata"))
 ggplot_latent.profiles(SDresult$Result)
 ```
 

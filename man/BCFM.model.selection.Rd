@@ -14,6 +14,7 @@ BCFM.model.selection(
   covariance = TRUE,
   p.exponent = 2,
   every = 10,
+  cluster.size = 0.05,
   burnin = NA,
   output_dir = getwd()
 )
@@ -43,6 +44,8 @@ Default is TRUE.}
 \item{every}{Integer specifying the frequency of progress updates during MCMC.
 Default is 10.}
 
+\item{cluster.size}{Minimum proportion required for each cluster. Default is 0.05.}
+
 \item{burnin}{Number of initial MCMC iterations to discard when calculating IC.
 If NA, an appropriate burnin is determined automatically.}
 
@@ -60,7 +63,7 @@ Load this file to compare models and identify the optimal configuration.}
 }
 }
 \description{
-Performs Bayesian Covariance Factor Model analysis across a grid
+Performs Bayesian Clustering Factor Model analysis across a grid
 of group numbers and factor numbers. For each combination, the function fits
 the BCFM model, calculates IC, and saves results. This is the primary function
 for model selection to determine the optimal number of clusters and latent factors.

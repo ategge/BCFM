@@ -58,8 +58,8 @@ ggplot_IC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TRU
   rows2 <- data.frame(matrix)
   colnames(rows2) <- factor_list
   
+  rows2$groups <- group_list  
   f <- rows2 %>%
-    rownames_to_column('groups') %>%
     pivot_longer(cols = -groups, names_to = 'factors')
   
   f$factors <- factor(f$factors, levels = factor_list)
