@@ -78,7 +78,7 @@ BCFM.model.selection(
   factorlist = 3,         # Number of factors
   n.iter = 100,           # Number of MCMC iterations (use 50000+ for real analysis)
   burnin = 10,            # Burnin for IC calculation (use 10000+ for real analysis)
-  every = 10,             # Progress update frequency
+  every = 10,             # Retains the output of every "every" MCMC iterations
   output_dir = output_dir # Specify where to save results
 )
 ```
