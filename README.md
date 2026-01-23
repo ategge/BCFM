@@ -42,6 +42,7 @@ BCFM.model.selection(
   n.iter = 10000,                # Number of MCMC iterations
   burnin = 5000,                 # Burnin for Information Criterion calculations
   every = 10,                    # Retains the output of every "every" MCMC iterations
+  cluster.size = 0.01,           # Minimum proportion required for each cluster (default 0.05)
   output_dir = output_dir        # Specify where to save results
 
 )
