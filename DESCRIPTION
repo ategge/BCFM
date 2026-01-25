@@ -1,17 +1,17 @@
 Package: BCFM
 Type: Package
-Title: Bayesian Clustering Factor Model for Clustering and Factor Analysis
-Version: 0.1.0
+Title: Bayesian Clustering Factor Models
+Version: 1.0.0
 Authors@R: c(
     person("Allison", "Tegge", email = "ategge@vt.edu", role = "aut"),
     person("Marco", "Ferreira", email = "marf@vt.edu", role = "aut"),
     person("Hwasoo", "Shin", email = "hshin2@hfhs.org", role = "aut"),
-    person("Meriem", "Touami", email = "meriemt@vt.edu", role = c("aut", "cre"))
-  )
-Description: Implements Bayesian Clustering Factor Model (BCFM) for clustering 
-    and latent factor analysis of multivariate longitudinal data. Provides model 
-    selection tools, MCMC sampling via Rcpp, and comprehensive visualization functions 
-    for exploring cluster assignments, factor loadings, and model diagnostics.
+    person("Meriem", "Touami", email = "meriemt@vt.edu", role = c("aut", "cre")))
+Description: Implements the Bayesian Clustering Factor Models (BCFM) for 
+    simultaneous clustering and latent factor analysis of multivariate longitudinal data. 
+    The model accounts for within-cluster dependence through shared latent factors while allowing heterogeneity across clusters, enabling flexible covariance modeling in high-dimensional settings. 
+    Inference is performed using Markov chain Monte Carlo (MCMC) methods with computationally intensive steps implemented via 'Rcpp'. 
+    Model selection and visualization tools are provided. The methodology is described in Shin, Ferreira, and Tegge (2018) <doi:10.1002/sim.70350>.
 License: GPL (>= 3)
 SystemRequirements: pandoc (>= 1.12.3) for building vignettes
 Imports: 

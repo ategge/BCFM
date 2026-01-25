@@ -47,7 +47,7 @@ A list containing:
 }
 }
 \description{
-Fits a single Bayesian Clustering Factor Model (BCFM) using C++
+Fits a single Bayesian Clustering Factor Models (BCFM) using C++
 implementation. This function serves as a wrapper for the BCFMcpp function,
 handling timing and output formatting.
 }

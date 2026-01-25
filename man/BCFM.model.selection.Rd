@@ -63,7 +63,7 @@ Load this file to compare models and identify the optimal configuration.}
 }
 }
 \description{
-Performs Bayesian Clustering Factor Model analysis across a grid
+Performs Bayesian Clustering Factor Models analysis across a grid
 of group numbers and factor numbers. For each combination, the function fits
 the BCFM model, calculates IC, and saves results. This is the primary function
 for model selection to determine the optimal number of clusters and latent factors.

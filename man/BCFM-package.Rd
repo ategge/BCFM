@@ -4,9 +4,9 @@
 \name{BCFM-package}
 \alias{BCFM}
 \alias{BCFM-package}
-\title{BCFM: Bayesian Clustering Factor Model for Clustering and Factor Analysis}
+\title{BCFM: Bayesian Clustering Factor Models}
 \description{
-Implements Bayesian Clustering Factor Model (BCFM) for clustering and latent factor analysis of multivariate longitudinal data. Provides model selection tools, MCMC sampling via Rcpp, and comprehensive visualization functions for exploring cluster assignments, factor loadings, and model diagnostics.
+Implements the Bayesian Clustering Factor Models (BCFM) for simultaneous clustering and latent factor analysis of multivariate longitudinal data. The model accounts for within-cluster dependence through shared latent factors while allowing heterogeneity across clusters, enabling flexible covariance modeling in high-dimensional settings. Inference is performed using Markov chain Monte Carlo (MCMC) methods with computationally intensive steps implemented via 'Rcpp'. Model selection and visualization tools are provided. The methodology is described in Shin, Ferreira, and Tegge (2018) \doi{10.1002/sim.70350}.
 }
 \seealso{
 Useful links:

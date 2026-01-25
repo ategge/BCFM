@@ -28,7 +28,7 @@ library(ggplot2)
 
 # Introduction
 
-This vignette demonstrates a complete workflow for using the **BCFM** (Bayesian Clustering Factor Model) package. We'll use a simulated dataset that comes with the package to illustrate:
+This vignette demonstrates a complete workflow for using the **BCFM** (Bayesian Clustering Factor Models) package. We'll use a simulated dataset that comes with the package to illustrate:
 
 - Data preparation and exploration
 - Model selection across different numbers of groups and factors

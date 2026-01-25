@@ -7,7 +7,7 @@ output: github_document
 <!-- badges: start -->
 <!-- badges: end -->
 
-Bayesian Clustering Factor Model (BCFM) for clustering and latent factor analysis of multivariate cross-sectional data.
+Bayesian Clustering Factor Models (BCFM) for clustering and latent factor analysis of multivariate cross-sectional data.
 
 ## Installation
 
@@ -35,14 +35,14 @@ output_dir <- "~/BCFM_results"
 # Run model selection
 BCFM.model.selection(
   data = sim.data,
-  cluster.vars = cluster.vars,  # Required parameter
+  cluster.vars = cluster.vars,   # Required parameter
   grouplist = 2:4,               # Try 2, 3, and 4 groups
   factorlist = 2:4,              # Try 2, 3, and 4 factors
   n.iter = 10000,                # Number of MCMC iterations
   burnin = 5000,                 # Burnin for Information Criterion calculations
-  every = 1000,                   # Progress update frequency
+  every = 10,                    # Progress update frequency
+  cluster.size = 0.01,           # Minimum proportion required for each cluster (default 0.05)
   output_dir = output_dir        # Specify where to save results
-
 )
 
 # Results are saved in output_dir
