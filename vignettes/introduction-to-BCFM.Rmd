@@ -65,8 +65,8 @@ The first step is to identify the optimal number of groups (clusters) and latent
 # Specify variables to use for clustering
 cluster.vars <- paste0("V", 1:n_vars)
 
-# Create output directory for results
-output_dir <- "~/BCFM_analysis"
+# Create output directory for results (using tempdir() for CRAN compliance)
+output_dir <- file.path(tempdir(), "BCFM_analysis")
 
 # Run model selection
 # Note: grouplist and factorlist can be vectors (e.g., c(2, 3, 4)) or sequences (e.g., 2:4)
@@ -79,13 +79,14 @@ BCFM.model.selection(
   n.iter = 100,           # Number of MCMC iterations (use 50000+ for real analysis)
   burnin = 10,            # Burnin for IC calculation (use 10000+ for real analysis)
   every = 10,             # Retains the output of every "every" MCMC iterations
+  cluster.size = 0.01,    # Minimum proportion required for each cluster (default 0.05)
   output_dir = output_dir # Specify where to save results
 )
 ```
 
 > **Note:** For demonstration, we use minimal iterations (100) and burnin (10). For actual analysis, use `n.iter = 50000` and `burnin = 10000` or higher to ensure convergence.
 
-> **Output Directory:** The `output_dir` parameter specifies where model results will be saved. This ensures you have write permissions and can easily organize results from multiple analyses. If not specified, results are saved to the current working directory.
+> **Output Directory:** The `output_dir` parameter specifies where model results will be saved. In this vignette, we use `tempdir()` to comply with CRAN policies. For your own analyses, you can specify any directory where you have write permissions. If not specified, results are saved to the current working directory.
 
 ---
 

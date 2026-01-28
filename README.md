@@ -31,7 +31,8 @@ data("sim.data", package = "BCFM")
 cluster.vars <- paste0("V", 1:20)
 
 # Create output directory for results
-output_dir <- "~/BCFM_results"
+# Use tempdir() for examples, or specify your own directory for real analyses
+output_dir <- file.path(tempdir(), "BCFM_results")
 
 # Run model selection
 BCFM.model.selection(
