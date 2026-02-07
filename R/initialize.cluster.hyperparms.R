@@ -6,14 +6,15 @@
 #' @param covariance  Use of covariance matrix of common factors. If FALSE, it uses the correlation matrix.
 #' @param diag.Psi  Diagonal matrix for cluster covariance. If FALSE, it uses the sample covariance.
 #' @param vague.mu  Use of large cluster covariance prior.
-#' @param zero.mu  Set the cluster mean prior at 0. If FALSE, the cluster mean prior are the sample means of the clusters. 
+#' @param zero.mu  Set the cluster mean prior at 0. If FALSE, the cluster mean prior are the sample means of the clusters.
+#' @param seed  Optional integer seed for reproducibility.
 #'
 #' @return  A list of mean and variance hyperparameter of mu, and scale hyperparameter of Omega
 #' @importFrom fastmatrix ldl
 #' @export
 
 
-initialize.cluster.hyperparms = function(data, model.attributes, covariance=FALSE, diag.Psi = FALSE, vague.mu = FALSE, zero.mu = FALSE){
+initialize.cluster.hyperparms = function(data, model.attributes, covariance=FALSE, diag.Psi = FALSE, vague.mu = FALSE, zero.mu = FALSE, seed = NULL){
 
   threshold <- round(model.attributes$R + 0.5 - 0.5 * sqrt( 1 + 8 * model.attributes$R))
   if(model.attributes$L > threshold){
@@ -60,7 +61,7 @@ initialize.cluster.hyperparms = function(data, model.attributes, covariance=FALS
   kclust.sse <- matrix(NA, nrow(data.matrix), n.iter)
   
   for(i in 1:n.iter){
-    set.seed(round(runif(1)*1000))
+    if (!is.null(seed)) set.seed(seed)
 
     currentkmeans <- kmeans(data.PCX.transformed, centers = model.attributes$G) # centers = number of clusters
     for(j in 1:nrow(data.matrix)){

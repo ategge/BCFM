@@ -10,7 +10,8 @@ initialize.cluster.hyperparms(
   covariance = FALSE,
   diag.Psi = FALSE,
   vague.mu = FALSE,
-  zero.mu = FALSE
+  zero.mu = FALSE,
+  seed = NULL
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ initialize.cluster.hyperparms(
 \item{vague.mu}{Use of large cluster covariance prior.}
 
 \item{zero.mu}{Set the cluster mean prior at 0. If FALSE, the cluster mean prior are the sample means of the clusters.}
+
+\item{seed}{Optional integer seed for reproducibility.}
 }
 \value{
 A list of mean and variance hyperparameter of mu, and scale hyperparameter of Omega

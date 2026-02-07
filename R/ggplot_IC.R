@@ -36,21 +36,20 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # After running BCFM.model.selection
-#' load("IC.Rdata")
-#' 
+#' \donttest{
+#' # Create a toy IC matrix for demonstration
+#' IC.matrix <- matrix(c(100, 95, 90, 92, 88, 85), nrow = 2, ncol = 3)
+#' rownames(IC.matrix) <- paste0("G", 2:3)
+#' colnames(IC.matrix) <- paste0("F", 1:3)
+#'
 #' # Combined plot (default)
-#' plot_IC(IC.matrix, factor_list = 2:4, group_list = 2:4)
-#' 
+#' ggplot_IC(IC.matrix, factor_list = 1:3, group_list = 2:3)
+#'
 #' # Separate ggplot objects
-#' plots <- plot_IC(IC.matrix, factor_list = 2:4, group_list = 2:4, 
-#'                   combine = FALSE)
-#' plots$by_groups      # First plot
-#' plots$by_factors     # Second plot
-#' 
-#' # Customize individual plots
-#' plots$by_groups + ggplot2::ggtitle("My Custom Title")
+#' plots <- ggplot_IC(IC.matrix, factor_list = 1:3, group_list = 2:3,
+#'                     combine = FALSE)
+#' plots$by_groups
+#' plots$by_factors
 #' }
 ggplot_IC <- function(matrix, factor_list = 2:4, group_list = 2:4, combine = TRUE) {
   

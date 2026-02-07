@@ -22,8 +22,9 @@
 #' @param cluster.size Minimum proportion required for each cluster. Default is 0.05.
 #' @param burnin Number of initial MCMC iterations to discard when calculating IC.
 #'   If NA, an appropriate burnin is determined automatically.
-#' @param output_dir Directory where results will be saved. Defaults to current
-#'   working directory. The function will create this directory if it doesn't exist.
+#' @param output_dir Directory where results will be saved. Defaults to
+#'   \code{tempdir()}. The function will create this directory if it doesn't exist.
+#' @param seed Optional integer seed for reproducibility.
 #'
 #' @details The function performs the following steps for each group-factor combination:
 #' \enumerate{
@@ -53,25 +54,22 @@
 #' even if individual models fail to converge.
 #'
 #' @examples
-#' \dontrun{
-#' # Run model selection over 2-4 groups and 1-3 factors
+#' \donttest{
+#' # Run model selection using the included simulated dataset
+#' data(sim.data)
 #' BCFM.model.selection(
-#'   data = mydata,
-#'   cluster.vars = c("var1", "var2", "var3", "var4"),
-#'   grouplist = 2:4,
-#'   factorlist = 1:3,
-#'   n.iter = 20000,
-#'   every = 100,
-#'   burnin = 5000
+#'   data = sim.data,
+#'   cluster.vars = paste0("V", 1:5),
+#'   grouplist = 2:3,
+#'   factorlist = 1:2,
+#'   n.iter = 100,
+#'   every = 10,
+#'   burnin = 10
 #' )
 #'
 #' # Load and examine IC results
-#' load("IC.Rdata")
+#' load(file.path(tempdir(), "IC.Rdata"))
 #' print(IC.matrix)
-#'
-#' # Find optimal model
-#' optimal <- which(IC.matrix == min(IC.matrix, na.rm = TRUE), arr.ind = TRUE)
-#' cat("Optimal groups:", optimal[1], "Optimal factors:", optimal[2], "\n")
 #' }
 #'
 #' @seealso \code{\link{BCFM.fit}} for fitting a single model,
@@ -82,7 +80,7 @@
 BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
                                  n.iter = 50000, vague.mu = FALSE,
                                  covariance = TRUE, p.exponent = 2,
-                                 every = 10, cluster.size = 0.05, burnin = NA, output_dir = getwd()) {
+                                 every = 10, cluster.size = 0.05, burnin = NA, output_dir = tempdir(), seed = NULL) {
   # Handle output directory
   if (!dir.exists(output_dir)) {
     dir.create(output_dir, recursive = TRUE)
@@ -115,8 +113,7 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
       nf <- factorlist[j]
       message(sprintf("Factor: %d, Group: %d", nf, ng))
 
-      # For reproducibility: Setting seed for each dataset/number of groups/number of factors
-      set.seed(10 * ng + nf)
+      if (!is.null(seed)) set.seed(seed)
 
       filename.temp.out <- sprintf("results-covarianceF-g%d-f%d.Rdata", ng, nf)
 
@@ -140,7 +137,8 @@ BCFM.model.selection <- function(data, cluster.vars, grouplist, factorlist,
         data, model.attributes,
         covariance = covariance,
         diag.Psi = FALSE,
-        vague.mu = FALSE
+        vague.mu = FALSE,
+        seed = seed
       )
 
       hyp.parm <- initialize.hyp.parm(

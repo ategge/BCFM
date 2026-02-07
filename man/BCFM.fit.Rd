@@ -52,20 +52,21 @@ implementation. This function serves as a wrapper for the BCFMcpp function,
 handling timing and output formatting.
 }
 \examples{
-\dontrun{
-# Prepare data
-data.pre <- init.data(mydata, c("var1", "var2", "var3"))
+\donttest{
+# Prepare data using the included simulated dataset
+data(sim.data)
+data.pre <- init.data(sim.data, paste0("V", 1:5))
 
 # Initialize model components
-model.attributes <- initialize.model.attributes(S = 100, times = 1,
-                                                 R = 3, L = 2, G = 3)
+model.attributes <- initialize.model.attributes(S = nrow(sim.data), times = 1,
+                                                 R = 5, L = 2, G = 2)
 cluster.hyperparms <- initialize.cluster.hyperparms(data.pre, model.attributes)
 hyp.parm <- initialize.hyp.parm(model.attributes, cluster.hyperparms)
 
 # Fit model
 result <- BCFM.fit(data.pre, model.attributes, hyp.parm,
-                   n.iter = 10000, every = 100)
-print(result$run.time)
+                   n.iter = 100, every = 10)
+result$run.time
 }
 
 }

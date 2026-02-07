@@ -74,19 +74,20 @@ output_dir <- file.path(tempdir(), "BCFM_analysis")
 BCFM.model.selection(
   data = sim.data,
   cluster.vars = cluster.vars,
-  grouplist = 4,          # Number of groups 
+  grouplist = 4,          # Number of groups
   factorlist = 3,         # Number of factors
   n.iter = 100,           # Number of MCMC iterations (use 50000+ for real analysis)
   burnin = 10,            # Burnin for IC calculation (use 10000+ for real analysis)
   every = 10,             # Retains the output of every "every" MCMC iterations
   cluster.size = 0.01,    # Minimum proportion required for each cluster (default 0.05)
-  output_dir = output_dir # Specify where to save results
+  output_dir = output_dir, # Specify where to save results
+  seed = 123              # Optional seed for reproducibility
 )
 ```
 
 > **Note:** For demonstration, we use minimal iterations (100) and burnin (10). For actual analysis, use `n.iter = 50000` and `burnin = 10000` or higher to ensure convergence.
 
-> **Output Directory:** The `output_dir` parameter specifies where model results will be saved. In this vignette, we use `tempdir()` to comply with CRAN policies. For your own analyses, you can specify any directory where you have write permissions. If not specified, results are saved to the current working directory.
+> **Output Directory:** The `output_dir` parameter specifies where model results will be saved. By default, results are saved to `tempdir()`. For your own analyses, you can specify any directory where you have write permissions.
 
 ---
 

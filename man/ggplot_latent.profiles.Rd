@@ -39,16 +39,18 @@ A ggplot object
 Visualizes the latent factor profile means (mu) for each cluster, similar to Latent Profile Analysis (LPA) plots
 }
 \examples{
-\dontrun{
-# Basic usage
-ggplot_latent.profiles(Gibbs = SDresult$Result)
+\donttest{
+# Fit a model first using the included simulated dataset
+data(sim.data)
+data.pre <- init.data(sim.data, paste0("V", 1:5))
+model.attributes <- initialize.model.attributes(S = nrow(sim.data), times = 1,
+                                                 R = 5, L = 2, G = 2)
+cluster.hyperparms <- initialize.cluster.hyperparms(data.pre, model.attributes)
+hyp.parm <- initialize.hyp.parm(model.attributes, cluster.hyperparms)
+result <- BCFM.fit(data.pre, model.attributes, hyp.parm,
+                   n.iter = 100, every = 10)
 
-# With custom labels
-ggplot_latent.profiles(
-  Gibbs = SDresult$Result,
-  factor_labels = c("Cigarette", "E-cig", "Pipe", "Hookah", "Snus", "Cigar"),
-  cluster_names = c("Traditionalists", "Experimenters", "Hybrid Users",
-                    "Social Smokers", "Nicotine Enthusiasts")
-)
+# Plot latent profiles
+ggplot_latent.profiles(Gibbs = result$Result)
 }
 }

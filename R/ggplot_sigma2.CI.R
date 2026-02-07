@@ -10,6 +10,10 @@
 #' @param y.label Y-axis label. Default is "Variance"
 #' @param var_labels Character vector of variable names. If NULL, defaults to Variable 1, Variable 2, etc.
 #'
+#' @return A ggplot object showing the 95\% credible intervals (error bars) and
+#'   posterior means (points) of the idiosyncratic variances sigma squared for
+#'   each variable.
+#'
 #' @importFrom stats quantile
 #' @importFrom ggplot2 ggplot aes geom_point geom_errorbar theme_minimal labs theme element_text
 #'
