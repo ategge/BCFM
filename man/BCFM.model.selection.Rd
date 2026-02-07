@@ -16,7 +16,8 @@ BCFM.model.selection(
   every = 10,
   cluster.size = 0.05,
   burnin = NA,
-  output_dir = getwd()
+  output_dir = tempdir(),
+  seed = NULL
 )
 }
 \arguments{
@@ -49,8 +50,10 @@ Default is 10.}
 \item{burnin}{Number of initial MCMC iterations to discard when calculating IC.
 If NA, an appropriate burnin is determined automatically.}
 
-\item{output_dir}{Directory where results will be saved. Defaults to current
-working directory. The function will create this directory if it doesn't exist.}
+\item{output_dir}{Directory where results will be saved. Defaults to
+\code{tempdir()}. The function will create this directory if it doesn't exist.}
+
+\item{seed}{Optional integer seed for reproducibility.}
 }
 \value{
 Invisibly returns NULL. Results are saved to disk:
@@ -89,25 +92,22 @@ extensive model grids. The function includes error handling to continue executio
 even if individual models fail to converge.
 }
 \examples{
-\dontrun{
-# Run model selection over 2-4 groups and 1-3 factors
+\donttest{
+# Run model selection using the included simulated dataset
+data(sim.data)
 BCFM.model.selection(
-  data = mydata,
-  cluster.vars = c("var1", "var2", "var3", "var4"),
-  grouplist = 2:4,
-  factorlist = 1:3,
-  n.iter = 20000,
-  every = 100,
-  burnin = 5000
+  data = sim.data,
+  cluster.vars = paste0("V", 1:5),
+  grouplist = 2:3,
+  factorlist = 1:2,
+  n.iter = 100,
+  every = 10,
+  burnin = 10
 )
 
 # Load and examine IC results
-load("IC.Rdata")
+load(file.path(tempdir(), "IC.Rdata"))
 print(IC.matrix)
-
-# Find optimal model
-optimal <- which(IC.matrix == min(IC.matrix, na.rm = TRUE), arr.ind = TRUE)
-cat("Optimal groups:", optimal[1], "Optimal factors:", optimal[2], "\n")
 }
 
 }

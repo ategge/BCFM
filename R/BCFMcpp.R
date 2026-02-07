@@ -81,7 +81,7 @@ BCFMcpp <- function(data, model.attributes, hyp.parm, n.iter, every = 1, verbose
       g.save <- g.save + 1
     }
     if(verbose){
-      if (g %% 10000 == 0){cat("Done #Groups = ", model.attributes$G, ", #Factors = ", model.attributes$L, ", ",g,"th step\n")}
+      if (g %% 10000 == 0){message("Done #Groups = ", model.attributes$G, ", #Factors = ", model.attributes$L, ", ",g,"th step")}
     }
   }
   

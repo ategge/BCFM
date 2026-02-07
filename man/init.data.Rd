@@ -28,7 +28,7 @@ it returns the data as-is. Takes selected clustering variables and creates
 an array with dimensions (observations, variables, time points).
 }
 \examples{
-\dontrun{
+\donttest{
 # Example 1: Data frame with variable selection
 data <- data.frame(x1 = rnorm(100), x2 = rnorm(100), x3 = rnorm(100))
 cluster.vars <- c("x1", "x2", "x3")

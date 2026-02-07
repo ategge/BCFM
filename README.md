@@ -44,7 +44,8 @@ BCFM.model.selection(
   burnin = 5000,                 # Burnin for Information Criterion calculations
   every = 10,                    # Progress update frequency
   cluster.size = 0.01,           # Minimum proportion required for each cluster (default 0.05)
-  output_dir = output_dir        # Specify where to save results
+  output_dir = output_dir,       # Specify where to save results
+  seed = 123                     # Optional seed for reproducibility
 )
 
 # Results are saved in output_dir

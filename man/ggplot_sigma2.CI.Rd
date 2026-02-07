@@ -32,6 +32,11 @@ ggplot_sigma2.CI(
 
 \item{var_labels}{Character vector of variable names. If NULL, defaults to Variable 1, Variable 2, etc.}
 }
+\value{
+A ggplot object showing the 95\\% credible intervals (error bars) and
+posterior means (points) of the idiosyncratic variances sigma squared for
+each variable.
+}
 \description{
 It returns a credible interval plot of idiosyncratic variance, sigma squared. The lines are 95\% intervals, while the circles are posterior mean.
 }

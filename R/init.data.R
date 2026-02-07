@@ -17,7 +17,7 @@
 #'   of time points (defaults to 1 for cross-sectional data).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Example 1: Data frame with variable selection
 #' data <- data.frame(x1 = rnorm(100), x2 = rnorm(100), x3 = rnorm(100))
 #' cluster.vars <- c("x1", "x2", "x3")
